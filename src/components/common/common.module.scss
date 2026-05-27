@@ -1,0 +1,314 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+/* Reusable Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  outline: none;
+  font-size: 0.875rem;
+  border: 1px solid transparent;
+  @include transition-all;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btnSm {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+.btnMd {
+  padding: 10px 18px;
+}
+
+.btnLg {
+  padding: 14px 24px;
+  font-size: 1rem;
+}
+
+.btnPrimary {
+  background-color: var(--primary);
+  color: var(--text-white);
+  
+  &:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+  }
+}
+
+.btnSecondary {
+  background-color: var(--bg-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+  
+  &:hover:not(:disabled) {
+    border-color: var(--border-hover);
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+  }
+}
+
+.btnDanger {
+  background-color: var(--danger);
+  color: var(--text-white);
+  
+  &:hover:not(:disabled) {
+    background-color: #dc2626;
+  }
+}
+
+.btnSuccess {
+  background-color: var(--success);
+  color: var(--text-white);
+  
+  &:hover:not(:disabled) {
+    background-color: #059669;
+  }
+}
+
+.btnOutline {
+  background-color: transparent;
+  border-color: var(--primary);
+  color: var(--primary);
+  
+  &:hover:not(:disabled) {
+    background-color: var(--primary-light);
+  }
+}
+
+.btnGhost {
+  background-color: transparent;
+  color: var(--text-secondary);
+  
+  &:hover:not(:disabled) {
+    background-color: var(--border);
+    color: var(--text-primary);
+  }
+}
+
+.btnIcon {
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+}
+
+/* Form Controls */
+.formGroup {
+  @include flex-column;
+  gap: 6px;
+  width: 100%;
+}
+
+.label {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.input, .textarea, .select {
+  width: 100%;
+  padding: 10px 14px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  @include transition-all;
+  
+  &:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+  }
+  
+  &:disabled {
+    background-color: var(--bg-app);
+    color: var(--text-muted);
+    cursor: not-allowed;
+  }
+  
+  &::placeholder {
+    color: var(--text-muted);
+  }
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.errorText {
+  font-size: 0.75rem;
+  color: var(--danger);
+  margin-top: 2px;
+}
+
+.inputError {
+  border-color: var(--danger) !important;
+  
+  &:focus {
+    box-shadow: 0 0 0 3px var(--danger-light) !important;
+  }
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: capitalize;
+}
+
+.badgeSuccess {
+  background-color: var(--success-light);
+  color: var(--success);
+}
+
+.badgeWarning {
+  background-color: var(--warning-light);
+  color: var(--warning);
+}
+
+.badgeDanger {
+  background-color: var(--danger-light);
+  color: var(--danger);
+}
+
+.badgeInfo {
+  background-color: var(--info-light);
+  color: var(--info);
+}
+
+.badgeMuted {
+  background-color: var(--border);
+  color: var(--text-secondary);
+}
+
+/* Generic Table */
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  @include custom-scrollbar;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.thead {
+  background-color: var(--bg-app);
+  border-bottom: 1px solid var(--border);
+  
+  th {
+    padding: 12px 18px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.775rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+.tbody {
+  tr {
+    border-bottom: 1px solid var(--border);
+    @include transition-all;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    &:hover {
+      background-color: rgba(var(--primary-rgb), 0.02);
+    }
+  }
+  
+  td {
+    padding: 14px 18px;
+    color: var(--text-primary);
+  }
+}
+
+.tablePagination {
+  @include flex-between;
+  padding: 12px 18px;
+  border-top: 1px solid var(--border);
+  background-color: var(--bg-card);
+  
+  .paginationText {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+  
+  .paginationBtns {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+/* Skeletons */
+.skeleton {
+  background: linear-gradient(90deg, var(--border) 25%, var(--bg-app) 50%, var(--border) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Empty State */
+.emptyState {
+  @include flex-column;
+  @include flex-center;
+  padding: 48px 24px;
+  text-align: center;
+  background-color: var(--bg-card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+  
+  .emptyIcon {
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+  
+  p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    max-width: 320px;
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,853 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+/* Dashboard Layout */
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.metricCard {
+  @include premium-card;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  
+  .metricIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background-color: var(--primary-light);
+    color: var(--primary);
+    @include flex-center;
+    flex-shrink: 0;
+  }
+  
+  .metricData {
+    @include flex-column;
+    
+    .metricValue {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+    
+    .metricLabel {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+  }
+}
+
+.chartGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  
+  @include md-screen {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chartCard {
+  @include premium-card;
+  padding: 24px;
+  @include flex-column;
+  gap: 16px;
+  
+  .chartHeader {
+    @include flex-between;
+    
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+  }
+}
+
+.dashboardSectionGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  
+  @include md-screen {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sectionCard {
+  @include premium-card;
+  padding: 24px;
+  
+  .sectionHeader {
+    @include flex-between;
+    margin-bottom: 20px;
+    
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .viewAllLink {
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--primary);
+      
+      &:hover {
+        color: var(--primary-hover);
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+/* Activity / Renewal Streams */
+.sidebarList {
+  @include flex-column;
+  gap: 14px;
+}
+
+.activityItem {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .activityIcon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--bg-app);
+    color: var(--text-secondary);
+    @include flex-center;
+    flex-shrink: 0;
+  }
+  
+  .activityInfo {
+    flex: 1;
+    min-width: 0;
+    
+    .activityTitle {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      @include truncate;
+    }
+    
+    .activityTime {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+  }
+}
+
+.renewalItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background-color: var(--bg-app);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  
+  .renewalInfo {
+    @include flex-column;
+    min-width: 0;
+    
+    .renewalName {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      @include truncate;
+    }
+    
+    .renewalSub {
+      font-size: 0.775rem;
+      color: var(--text-secondary);
+      @include truncate;
+      margin-top: 2px;
+    }
+  }
+}
+
+/* Properties Grid & Detail Modules */
+.filterRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  
+  .searchContainer {
+    position: relative;
+    width: 300px;
+    
+    input {
+      padding-left: 36px;
+    }
+    
+    svg {
+      position: absolute;
+      left: 12px;
+      top: calc(50% - 8px);
+      color: var(--text-muted);
+    }
+    
+    @include mobile {
+      width: 100%;
+    }
+  }
+  
+  .controlsRight {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+    @include mobile {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+}
+
+.propertyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.propertyCard {
+  @include premium-card;
+  @include flex-column;
+  height: 100%;
+  
+  .cardImage {
+    height: 180px;
+    width: 100%;
+    object-fit: cover;
+    background-color: var(--border);
+  }
+  
+  .cardContent {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+    .propType {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+    }
+    
+    .propName {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 4px;
+    }
+    
+    .propAddress {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      @include truncate;
+    }
+  }
+  
+  .cardStats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    
+    .statItem {
+      @include flex-column;
+      
+      .statVal {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      
+      .statLbl {
+        font-size: 0.775rem;
+        color: var(--text-secondary);
+      }
+    }
+  }
+  
+  .cardProgress {
+    margin-top: 16px;
+    @include flex-column;
+    gap: 4px;
+    
+    .progressInfo {
+      @include flex-between;
+      font-size: 0.775rem;
+      font-weight: 500;
+    }
+    
+    .progressBar {
+      height: 6px;
+      width: 100%;
+      background-color: var(--border);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      
+      .progressFill {
+        height: 100%;
+        background-color: var(--primary);
+        border-radius: var(--radius-full);
+      }
+    }
+  }
+}
+
+/* Property Detail View */
+.detailGrid {
+  display: grid;
+  grid-template-columns: 2.5fr 1.5fr;
+  gap: 24px;
+  
+  @include md-screen {
+    grid-template-columns: 1fr;
+  }
+}
+
+.galleryCard {
+  @include premium-card;
+  padding: 0;
+  
+  .gallerySlider {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .sliderBtn {
+      position: absolute;
+      top: calc(50% - 18px);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border);
+      @include flex-center;
+      color: var(--text-primary);
+      box-shadow: var(--shadow-sm);
+      @include transition-all;
+      z-index: 10;
+      
+      &:hover {
+        background-color: #ffffff;
+        transform: scale(1.05);
+      }
+      
+      &.prev { left: 16px; }
+      &.next { right: 16px; }
+    }
+  }
+  
+  .galleryMeta {
+    padding: 24px;
+  }
+}
+
+.infoBlockGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+  
+  .infoBlock {
+    padding: 12px;
+    background-color: var(--bg-app);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    
+    .blockLabel {
+      font-size: 0.775rem;
+      color: var(--text-secondary);
+      margin-bottom: 2px;
+    }
+    
+    .blockValue {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+  }
+}
+
+.amenityGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* Tenant Profiles listing card */
+.tenantGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.tenantCard {
+  @include premium-card;
+  padding: 20px;
+  @include flex-column;
+  align-items: center;
+  text-align: center;
+  
+  .tenantAvatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 12px;
+    border: 2.5px solid var(--border);
+  }
+  
+  .tenantName {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  
+  .tenantCompany {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+    height: 1.5em;
+    @include truncate;
+  }
+  
+  .tenantContact {
+    margin-top: 12px;
+    width: 100%;
+    font-size: 0.825rem;
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .tenantFooter {
+    width: 100%;
+    margin-top: 12px;
+    @include flex-between;
+  }
+}
+
+/* Tab navigation items */
+.tabsContainer {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.tabItem {
+  padding: 12px 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  position: relative;
+  cursor: pointer;
+  @include transition-all;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: transparent;
+    transition: background-color var(--transition-speed) ease;
+  }
+  
+  &:hover {
+    color: var(--text-primary);
+  }
+  
+  &.active {
+    color: var(--primary);
+    
+    &::after {
+      background-color: var(--primary);
+    }
+  }
+}
+
+/* Timeline Components */
+.timeline {
+  position: relative;
+  padding-left: 24px;
+  border-left: 2px solid var(--border);
+  margin-left: 8px;
+  @include flex-column;
+  gap: 20px;
+}
+
+.timelineItem {
+  position: relative;
+  
+  .timelineDot {
+    position: absolute;
+    left: -31px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--bg-card);
+    border: 2px solid var(--primary);
+    
+    &.payment { border-color: var(--success); }
+    &.maintenance { border-color: var(--warning); }
+    &.ended { border-color: var(--danger); }
+  }
+  
+  .timelineContent {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    
+    .timelineHeader {
+      @include flex-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      
+      h4 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      
+      span {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+    }
+    
+    p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 6px;
+    }
+  }
+}
+
+/* Kanban Board for Maintenance */
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  align-items: start;
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.boardColumn {
+  background-color: var(--bg-app);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  @include flex-column;
+  gap: 14px;
+  min-height: 400px;
+  
+  .columnHeader {
+    @include flex-between;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+    
+    h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .columnCount {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: var(--radius-full);
+      background-color: var(--border);
+      color: var(--text-secondary);
+    }
+  }
+}
+
+.ticketCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  @include transition-all;
+  @include flex-column;
+  gap: 12px;
+  
+  &:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  
+  .ticketMeta {
+    @include flex-between;
+    
+    .ticketProp {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      @include truncate;
+      max-width: 120px;
+    }
+  }
+  
+  .ticketTitle {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+  
+  .ticketFooter {
+    @include flex-between;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+}
+
+/* Document Grid directory block */
+.docGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.docCard {
+  @include premium-card;
+  padding: 20px;
+  @include flex-column;
+  gap: 12px;
+  cursor: pointer;
+  
+  .docIconWrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background-color: var(--bg-app);
+    @include flex-center;
+    color: var(--primary);
+  }
+  
+  .docTitle {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    word-break: break-all;
+    @include truncate(2);
+    min-height: 2.8em;
+  }
+  
+  .docInfo {
+    @include flex-between;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+}
+
+/* Upload Document drag & drop area simulation */
+.uploadZone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 16px;
+  text-align: center;
+  background-color: var(--bg-card);
+  cursor: pointer;
+  @include transition-all;
+  @include flex-column;
+  @include flex-center;
+  gap: 8px;
+  
+  &:hover {
+    border-color: var(--primary);
+    background-color: rgba(var(--primary-rgb), 0.01);
+  }
+  
+  .uploadIcon {
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  
+  h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  p {
+    font-size: 0.775rem;
+    color: var(--text-secondary);
+  }
+}
+
+/* Global Modal base wrapper styling */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  @include flex-center;
+  padding: 16px;
+  animation: fadeIn 0.2s ease;
+}
+
+.modalContent {
+  width: 100%;
+  max-width: 540px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: scaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  &.large {
+    max-width: 720px;
+  }
+  
+  .modalHeader {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    @include flex-between;
+    
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    
+    .closeBtn {
+      color: var(--text-secondary);
+      @include flex-center;
+      
+      &:hover {
+        color: var(--text-primary);
+      }
+    }
+  }
+  
+  .modalBody {
+    padding: 24px;
+    overflow-y: auto;
+    max-height: calc(90vh - 120px);
+    @include custom-scrollbar;
+  }
+  
+  .modalFooter {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    background-color: var(--bg-app);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
